@@ -1,14 +1,15 @@
-import dayjs from "dayjs"
-import React from "react"
+import dayjs from "dayjs";
+import React from "react";
+import { Layout } from "antd";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <Layout.Footer className="footer">
       <span className="footer-text">
-        Humaniq dApps React Boilerplate © { dayjs().year() }
+        Humaniq dApps React Boilerplate © {dayjs().year()}
       </span>
-    </div>
-  )
-}
+    </Layout.Footer>
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,10 +1,16 @@
 import CompositeDisposable from "../../network/CompositeDisposable";
-import Disposable from "../../network/Disposable"
+import Disposable from "../../network/Disposable";
+import HttpService from "../../services/httpService";
+import ProviderStore from "../provider/providerStore";
 
 export default class BaseStore {
   protected compositeDisposable: CompositeDisposable<any>;
+  protected httpService: HttpService;
+  protected provider: ProviderStore;
 
   protected constructor() {
+    this.provider = new ProviderStore();
+    this.httpService = new HttpService();
     this.compositeDisposable = new CompositeDisposable<any>();
   }
 

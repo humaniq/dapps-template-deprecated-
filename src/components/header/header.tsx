@@ -1,15 +1,17 @@
-import React from "react"
+import React from "react";
+import { Layout } from "antd";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
-  return (
-    <div className="header">
-      <div className="header-user-actions">
-          <span>
-            TEST
-          </span>
-      </div>
-    </div>
-  )
-}
+  const { t } = useTranslation();
 
-export default Header
+  return (
+    <Layout.Header className="header">
+      <div className="header-user-actions">
+        <span>{t("appName")}</span>
+      </div>
+    </Layout.Header>
+  );
+};
+
+export default Header;
