@@ -1,53 +1,50 @@
 import { makeAutoObservable } from "mobx";
+import { Logger } from "../../utils/logger";
 
-class ProviderStore {
-  constructor() {
-    makeAutoObservable(this);
-  }
-
+export class ProviderStore {
   initialized = false;
-  currentAccount = null;
+  currentAccount: any = null;
   hasProvider = false;
 
-  async init() {
-    // @ts-ignore
+  constructor() {
+    makeAutoObservable(this, undefined, { autoBind: true });
+  }
+
+  init = async () => {
     if (window.ethereum) {
       this.hasProvider = true;
-      // @ts-ignore
-      window.ethereum.on("accountsChanged", (accounts) => {
+
+      window.ethereum.on("accountsChanged", (accounts: any) => {
         this.currentAccount = accounts[0];
       });
 
-      // @ts-ignore
       window.ethereum.on("disconnect", () => {
         this.currentAccount = null;
       });
 
-      // @ts-ignore
-      window.ethereum.on("connect", (accounts) => {
+      window.ethereum.on("connect", (accounts: any) => {
         this.currentAccount = accounts[0];
       });
 
-      // @ts-ignore
-      window.ethereum.on("message", (payload) => {
-        console.log("message", payload);
+      window.ethereum.on("message", (payload: any) => {
+        Logger.info("message", payload);
       });
 
       try {
-        // @ts-ignore
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         this.currentAccount = accounts[0];
       } catch (e) {
-        console.log("ERROR", e);
+        Logger.info("ERROR", e);
       }
     }
     this.initialized = true;
-  }
+  };
 
-  personalMessageRequest(message: any): any {
-    // @ts-ignore
+  personalMessageRequest = (message: any): any => {
+    if (!window.ethereum) return null;
+
     return window.ethereum.request({
       method: "personal_sign",
       params: [
@@ -55,7 +52,24 @@ class ProviderStore {
         this.currentAccount,
       ],
     });
-  }
+  };
+
+  connect = async () => {
+    if (!window.ethereum || window.ethereum?.currentAccount) return;
+
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      this.currentAccount = accounts[0];
+    } catch (e) {
+      Logger.info("ERROR", e);
+    }
+  };
+
+  disconnect = () => {
+    this.currentAccount = null;
+  };
 }
 
-export default ProviderStore;
+export const ETHProvider = new ProviderStore();

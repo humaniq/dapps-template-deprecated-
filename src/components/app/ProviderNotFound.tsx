@@ -1,24 +1,19 @@
-import dayjs from "dayjs";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import colors from "../../utils/colors";
 
-export const Footer = () => {
+export const ProviderNotFound = () => {
   const { t } = useTranslation();
 
   return (
     <div
       style={{
         display: "flex",
-        height: 60,
-        backgroundColor: colors.primary,
+        flex: 1,
         alignItems: "center",
         justifyContent: "center",
       }}
     >
-      <span>
-        {t("appName")} {dayjs().year()}
-      </span>
+      <span>{t("notFound")}</span>
     </div>
   );
 };

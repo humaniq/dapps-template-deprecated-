@@ -1,17 +1,21 @@
 import React from "react";
-import { Layout } from "antd";
 import { useTranslation } from "react-i18next";
+import colors from "../../utils/colors";
 
-const Header = () => {
+export const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <Layout.Header className="header">
-      <div className="header-user-actions">
-        <span>{t("appName")}</span>
-      </div>
-    </Layout.Header>
+    <div
+      style={{
+        display: "flex",
+        height: 60,
+        backgroundColor: colors.primary,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <span>{t("appName")}</span>
+    </div>
   );
 };
-
-export default Header;

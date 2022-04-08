@@ -1,17 +1,17 @@
-export default class StorageService {
+export class StorageService {
   setItem(itemName: string, value: string) {
-    localStorage.setItem(itemName, value)
+    localStorage.setItem(itemName, value);
   }
 
   getItem(itemName: string): string {
-    return localStorage.getItem(itemName) || ""
+    return localStorage.getItem(itemName) || "";
   }
 
   clearItem(itemName: string) {
-    localStorage.removeItem(itemName)
+    localStorage.removeItem(itemName);
   }
 
   clearAll() {
-    localStorage.clear()
+    localStorage.clear();
   }
 }

@@ -1,6 +1,5 @@
 {
-  "appName": "Humaniq Identity dAPP",
-  "firstName": "First name",
-  "lastName": "Last name",
-  "update": "Update"
+  "appName": "dApp template",
+  "connectWallet": "Connect your Wallet",
+  "notFound": "Not Found"
 }

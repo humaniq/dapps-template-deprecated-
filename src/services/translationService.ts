@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 
 export const translationKey = "i18nextLng";
 
-export default class TranslationService {
+export class TranslationService {
   translate(text: string, ...args: any[]) {
     return i18next.t(text, args);
   }
